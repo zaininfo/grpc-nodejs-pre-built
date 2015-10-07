@@ -1,0 +1,214 @@
+{
+    "package": "grpc.testing",
+    "messages": [
+        {
+            "name": "Empty",
+            "fields": []
+        },
+        {
+            "name": "Payload",
+            "fields": [
+                {
+                    "rule": "optional",
+                    "type": "PayloadType",
+                    "name": "type",
+                    "id": 1
+                },
+                {
+                    "rule": "optional",
+                    "type": "bytes",
+                    "name": "body",
+                    "id": 2
+                }
+            ]
+        },
+        {
+            "name": "SimpleRequest",
+            "fields": [
+                {
+                    "rule": "optional",
+                    "type": "PayloadType",
+                    "name": "response_type",
+                    "id": 1
+                },
+                {
+                    "rule": "optional",
+                    "type": "int32",
+                    "name": "response_size",
+                    "id": 2
+                },
+                {
+                    "rule": "optional",
+                    "type": "Payload",
+                    "name": "payload",
+                    "id": 3
+                },
+                {
+                    "rule": "optional",
+                    "type": "bool",
+                    "name": "fill_username",
+                    "id": 4
+                },
+                {
+                    "rule": "optional",
+                    "type": "bool",
+                    "name": "fill_oauth_scope",
+                    "id": 5
+                }
+            ]
+        },
+        {
+            "name": "SimpleResponse",
+            "fields": [
+                {
+                    "rule": "optional",
+                    "type": "Payload",
+                    "name": "payload",
+                    "id": 1
+                },
+                {
+                    "rule": "optional",
+                    "type": "string",
+                    "name": "username",
+                    "id": 2
+                },
+                {
+                    "rule": "optional",
+                    "type": "string",
+                    "name": "oauth_scope",
+                    "id": 3
+                }
+            ]
+        },
+        {
+            "name": "StreamingInputCallRequest",
+            "fields": [
+                {
+                    "rule": "optional",
+                    "type": "Payload",
+                    "name": "payload",
+                    "id": 1
+                }
+            ]
+        },
+        {
+            "name": "StreamingInputCallResponse",
+            "fields": [
+                {
+                    "rule": "optional",
+                    "type": "int32",
+                    "name": "aggregated_payload_size",
+                    "id": 1
+                }
+            ]
+        },
+        {
+            "name": "ResponseParameters",
+            "fields": [
+                {
+                    "rule": "optional",
+                    "type": "int32",
+                    "name": "size",
+                    "id": 1
+                },
+                {
+                    "rule": "optional",
+                    "type": "int32",
+                    "name": "interval_us",
+                    "id": 2
+                }
+            ]
+        },
+        {
+            "name": "StreamingOutputCallRequest",
+            "fields": [
+                {
+                    "rule": "optional",
+                    "type": "PayloadType",
+                    "name": "response_type",
+                    "id": 1
+                },
+                {
+                    "rule": "repeated",
+                    "type": "ResponseParameters",
+                    "name": "response_parameters",
+                    "id": 2
+                },
+                {
+                    "rule": "optional",
+                    "type": "Payload",
+                    "name": "payload",
+                    "id": 3
+                }
+            ]
+        },
+        {
+            "name": "StreamingOutputCallResponse",
+            "fields": [
+                {
+                    "rule": "optional",
+                    "type": "Payload",
+                    "name": "payload",
+                    "id": 1
+                }
+            ]
+        }
+    ],
+    "enums": [
+        {
+            "name": "PayloadType",
+            "values": [
+                {
+                    "name": "COMPRESSABLE",
+                    "id": 0
+                },
+                {
+                    "name": "UNCOMPRESSABLE",
+                    "id": 1
+                },
+                {
+                    "name": "RANDOM",
+                    "id": 2
+                }
+            ]
+        }
+    ],
+    "services": [
+        {
+            "name": "TestService",
+            "options": {},
+            "rpc": {
+                "EmptyCall": {
+                    "request": "Empty",
+                    "response": "Empty",
+                    "options": {}
+                },
+                "UnaryCall": {
+                    "request": "SimpleRequest",
+                    "response": "SimpleResponse",
+                    "options": {}
+                },
+                "StreamingOutputCall": {
+                    "request": "StreamingOutputCallRequest",
+                    "response": "StreamingOutputCallResponse",
+                    "options": {}
+                },
+                "StreamingInputCall": {
+                    "request": "StreamingInputCallRequest",
+                    "response": "StreamingInputCallResponse",
+                    "options": {}
+                },
+                "FullDuplexCall": {
+                    "request": "StreamingOutputCallRequest",
+                    "response": "StreamingOutputCallResponse",
+                    "options": {}
+                },
+                "HalfDuplexCall": {
+                    "request": "StreamingOutputCallRequest",
+                    "response": "StreamingOutputCallResponse",
+                    "options": {}
+                }
+            }
+        }
+    ]
+}
